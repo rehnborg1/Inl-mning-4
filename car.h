@@ -8,7 +8,7 @@
 #include <stdbool.h>
 
 /********************************************************************************
-* car_transmission: Enumeration för val av transmission (manuell/automat)
+* car_transmission: Enumeration fÃ¶r val av transmission (manuell/automat)
 ********************************************************************************/
 enum car_transmission
 {
@@ -17,7 +17,7 @@ enum car_transmission
 };
 
 /********************************************************************************
-* car: Strukt för lagring av bilrelaterad data. 
+* car: Strukt fÃ¶r lagring av bilrelaterad data. 
 ********************************************************************************/
 struct car
 {
@@ -27,13 +27,34 @@ struct car
 	unsigned int year_of_launch;
 	enum car_transmission transmission;
 
+	/********************************************************************************
+	* print:	Skriver ut lagrad bildata via angiven utstrÃ¶m, dÃ¤r
+	*               standardutenheten stdout anvÃ¤nds som default fÃ¶r utskrift
+	*               i terminalen.
+	*
+	*               - self   : Pekare till objektet som lagrar bildatan.
+	*               - ostream: Pekare till angiven utstrÃ¶m (default = stdout).
+	********************************************************************************/
+	void (*print)(struct car* self,
+				  FILE* ostream);
+
+	/********************************************************************************
+	* change_colour: Byter fÃ¤rg pÃ¥ bilen via pekare.
+	********************************************************************************/
+	void (*change_colour)(struct car* self, 
+						  char* colour);
+
+	/********************************************************************************
+	* change_transmission: Byter bilens transmission (manuell/automat)
+	********************************************************************************/
+	void (*change_transmission)(struct car* self, bool transmission);
 };
 
 /********************************************************************************
-* car_init: Initieringsrutin/konstruktor för givet car-objekt, där ovanstënde
+* car_init: Initieringsrutin/konstruktor fÃ¶r givet car-objekt, dÃ¤r ovanstÃ«nde
 *			parametrar passeras tillsammans med en pekare till car-objektet.
-*			Denna funktion skall utgöra ett alternativ till direkt initiering
-*			när ett objekt skapas.
+*			Denna funktion skall utgÃ¶ra ett alternativ till direkt initiering
+*			nÃ¤r ett objekt skapas.
 ********************************************************************************/
 void car_init(struct car* self, 
 			  char* brand, 
@@ -42,7 +63,7 @@ void car_init(struct car* self,
 			  enum car_transmission transmission);
 
 /********************************************************************************
-* car_clear: Nollställer givet car-objekt. Samtliga parametrar sätts till 0,
+* car_clear: NollstÃ¤ller givet car-objekt. Samtliga parametrar sÃ¤tts till 0,
 *			 nullpekare eller liknande).
 ********************************************************************************/
 void car_clear(struct car* self);
@@ -58,28 +79,28 @@ struct car* car_new(char* brand,
 					enum car_transmission transmission);
 
 /********************************************************************************
-* car_delete:	 Raderar angivet car-objekt genom att frigöra dynamiskt
-*                allokerat minne för denna och sätter motsvarande pekare till
-*                null. För att möjliggöra detta passeras adressen till den pekare
-*                som pekar på det dynamiskt allokerade minnet.
+* car_delete:	 Raderar angivet car-objekt genom att frigÃ¶ra dynamiskt
+*                allokerat minne fÃ¶r denna och sÃ¤tter motsvarande pekare till
+*                null. FÃ¶r att mÃ¶jliggÃ¶ra detta passeras adressen till den pekare
+*                som pekar pÃ¥ det dynamiskt allokerade minnet.
 *
-*                - self: Adressen till den pekare som pekar på objektet som
+*                - self: Adressen till den pekare som pekar pÃ¥ objektet som
 *                        som ska raderas.
 ********************************************************************************/
 void car_delete(struct car** self);
 
 /********************************************************************************
-* car_print:	Skriver ut lagrad bildata via angiven utström, där
-*               standardutenheten stdout används som default för utskrift
+* car_print:	Skriver ut lagrad bildata via angiven utstrÃ¶m, dÃ¤r
+*               standardutenheten stdout anvÃ¤nds som default fÃ¶r utskrift
 *               i terminalen.
 *
 *               - self   : Pekare till objektet som lagrar bildatan.
-*               - ostream: Pekare till angiven utström (default = stdout).
+*               - ostream: Pekare till angiven utstrÃ¶m (default = stdout).
 ********************************************************************************/
 void car_print(struct car* self, FILE* ostream);
 
 /********************************************************************************
-* car_change_colour: Byter färg på bilen via pekare.
+* car_change_colour: Byter fÃ¤rg pÃ¥ bilen via pekare.
 ********************************************************************************/
 void car_change_colour(struct car* self, char* colour);
 
@@ -89,10 +110,10 @@ void car_change_colour(struct car* self, char* colour);
 void car_change_transmission(struct car* self, bool transmission);
 
 /********************************************************************************
-* file_read: Läser innehållet från angiven filsökväg rad för rad och skriver
+* file_read: LÃ¤ser innehÃ¥llet frÃ¥n angiven filsÃ¶kvÃ¤g rad fÃ¶r rad och skriver
 *            ut i terminalen.
 *
-*            - filepath: Pekare till filsökvägen där läsning skall ske.
+*            - filepath: Pekare till filsÃ¶kvÃ¤gen dÃ¤r lÃ¤sning skall ske.
 ********************************************************************************/
 void file_read(const char* filepath);
 
