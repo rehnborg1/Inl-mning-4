@@ -4,10 +4,10 @@
 * car_init:	   Lagrar angivna bil-attribut i ett car-objekt.
 *
 *         - self		     : Pekare till objektet som ska lagra uppgifterna.
-*         - brand		     : Bilens märke.
+*         - brand		     : Bilens mÃ¤rke.
 *         - model		     : Bilens modell.
-*         - colour		     : Bilens färg.
-*         - year_of_launch   : Året bilen kom.
+*         - colour		     : Bilens fÃ¤rg.
+*         - year_of_launch   : Ã…ret bilen kom.
 *         - car_transmission : Bilens transmissionstyp (manuell/automat) 
 *							   som en enumerator av enumerationen car_transmission.
 ********************************************************************************/
@@ -25,13 +25,16 @@ void car_init(struct car* self,
 	self->year_of_launch = year_of_launch;
 	self->transmission = transmission;
 
+	self->print = car_print;									// uppgift 2
+	self->change_colour = car_change_colour;
+	self->change_transmission = car_change_transmission;
 	return;
 }
 
 /********************************************************************************
-* car_clear: Nollställer bildata lagrat av angivet car-objekt.
+* car_clear: NollstÃ¤ller bildata lagrat av angivet car-objekt.
 *
-*               - self: Pekare till objektet som ska nollställas.
+*               - self: Pekare till objektet som ska nollstÃ¤llas.
 ********************************************************************************/
 
 void car_clear(struct car* self)
@@ -42,18 +45,22 @@ void car_clear(struct car* self)
 	self->year_of_launch = 0;
 	self->transmission = 0;
 
+	self->print = 0;									// uppgift 2
+	self->change_colour = 0;
+	self->change_transmission = 0;
+
 	return;
 }
 
 /********************************************************************************
 * car_new: Allokerar minne och lagrar angiven persondata i ett car-objekt.
 *             En pekare till det dynamiskt allokerade objektet returneras.
-*             Om minnesallokeringen misslyckas så returneras null.
+*             Om minnesallokeringen misslyckas sÃ¥ returneras null.
 *
-*         - brand		     : Bilens märke.
+*         - brand		     : Bilens mÃ¤rke.
 *         - model		     : Bilens modell.
-*         - colour		     : Bilens färg.
-*         - year_of_launch   : Året bilen kom.
+*         - colour		     : Bilens fÃ¤rg.
+*         - year_of_launch   : Ã…ret bilen kom.
 *         - car_transmission : Bilens transmissionstyp (manuell/automat)
 *							   som en enumerator av enumerationen car_transmission.
 ********************************************************************************/
@@ -71,12 +78,12 @@ struct car* car_new(char* brand,
 }
 
 /********************************************************************************
-* car_delete:	 Raderar angivet car-objekt genom att frigöra dynamiskt
-*                allokerat minne för denna och sätter motsvarande pekare till
-*                null. För att möjliggöra detta passeras adressen till den pekare
-*                som pekar på det dynamiskt allokerade minnet.
+* car_delete:	 Raderar angivet car-objekt genom att frigÃ¶ra dynamiskt
+*                allokerat minne fÃ¶r denna och sÃ¤tter motsvarande pekare till
+*                null. FÃ¶r att mÃ¶jliggÃ¶ra detta passeras adressen till den pekare
+*                som pekar pÃ¥ det dynamiskt allokerade minnet.
 *
-*                - self: Adressen till den pekare som pekar på objektet som
+*                - self: Adressen till den pekare som pekar pÃ¥ objektet som
 *                        som ska raderas.
 ********************************************************************************/
 
@@ -88,12 +95,12 @@ void car_delete(struct car** self)
 }
 
 /********************************************************************************
-* car_print:	Skriver ut lagrad bildata via angiven utström, där
-*               standardutenheten stdout används som default för utskrift
+* car_print:	Skriver ut lagrad bildata via angiven utstrÃ¶m, dÃ¤r
+*               standardutenheten stdout anvÃ¤nds som default fÃ¶r utskrift
 *               i terminalen.
 *
 *               - self   : Pekare till objektet som lagrar bildatan.
-*               - ostream: Pekare till angiven utström (default = stdout).
+*               - ostream: Pekare till angiven utstrÃ¶m (default = stdout).
 ********************************************************************************/
 
 void car_print(struct car* self, FILE* ostream)
@@ -118,7 +125,7 @@ void car_print(struct car* self, FILE* ostream)
 }
 
 /********************************************************************************
-* car_change_colour: Byter färg på bilen via pekare.
+* car_change_colour: Byter fÃ¤rg pÃ¥ bilen via pekare.
 ********************************************************************************/
 
 void car_change_colour(struct car* self, char* colour)
@@ -128,7 +135,7 @@ void car_change_colour(struct car* self, char* colour)
 }
 
 /********************************************************************************
-* car_change_transmission: Byter bilens transmission från manuell-automat, 
+* car_change_transmission: Byter bilens transmission frÃ¥n manuell-automat, 
 *						   automat-manuell.
 ********************************************************************************/
 
@@ -146,8 +153,8 @@ void car_change_transmission(struct car* self, bool transmission)
 }
 
 /********************************************************************************
-* file_read: Funktion som öppnar dokumentet cars.txt och skriver ut innehållet
-*			 som strängar i terminalen. Funktionen slutar skriva ut när den
+* file_read: Funktion som Ã¶ppnar dokumentet cars.txt och skriver ut innehÃ¥llet
+*			 som strÃ¤ngar i terminalen. Funktionen slutar skriva ut nÃ¤r den
 *			 kommit till en tom rad.
 ********************************************************************************/
 
