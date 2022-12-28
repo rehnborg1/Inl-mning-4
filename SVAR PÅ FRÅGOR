@@ -3,5 +3,7 @@ första argument (uppgift 1) samt implementering av funktionspekare för att i h
 programmering (uppgift 2). Vad anser du om respektive implementering, ser du några för- och nackdelar, exempelvis
 gällande struktur, enkelhet med mera. Först och främst, vilken implementering föredrar du?
 
-Jag skulle säga att det gör koden lite mer komplext att använda funktionspekare, men det ser väl kanske lite snyggare ut och är lite mer likt C++ kod.
+Jag skulle säga att det gör koden lite mer komplext att använda funktionspekare. Samt att det gör att koden tar mer plats än 
+den behöver göra. Har man dåligt med plats som i inbygda system så had ejag nog valt första lösningen. 
+Det ser väl kanske lite snyggare ut och är lite mer likt C++ kod dock i lösning 2.
 Jag har inte mycket att jämföra med så för mig känns det lättare att implementera strukten car via externa funktioner med struktpekare self.
